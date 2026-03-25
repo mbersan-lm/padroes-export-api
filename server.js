@@ -65,7 +65,7 @@ function generateHTML(s) {
   var blurRegionTop = 760;
   var blurRegionHeight = 1040;
   var numLayers = 12;
-  var maxBlur = 15;
+  var maxBlur = s.maxBlur || 7.5;
   for (var i = 0; i < numLayers; i++) {
     var blur = (maxBlur * (i + 1)) / numLayers;
     var startPct = (i / numLayers) * 100;
@@ -78,9 +78,12 @@ function generateHTML(s) {
   var parts = [];
   parts.push('<!DOCTYPE html>');
   parts.push('<html><head><meta charset="utf-8"><style>');
-  parts.push('@font-face{font-family:"Tusker Grotesk";src:url("' + (s.tuskerFontUrl || '') + '") format("opentype");font-weight:600;font-style:normal;}');
-  parts.push('@font-face{font-family:"General Sans";src:url("' + (s.generalSansFontUrl || '') + '") format("opentype");font-weight:400;font-style:normal;}');
-  parts.push('@font-face{font-family:"General Sans";src:url("' + (s.generalSansMediumUrl || '') + '") format("opentype");font-weight:500;font-style:normal;}');
+  var tuskerSrc = s.tuskerFontBase64 ? s.tuskerFontBase64 : (s.tuskerFontUrl || '');
+  var generalSansSrc = s.generalSansFontBase64 ? s.generalSansFontBase64 : (s.generalSansFontUrl || '');
+  var generalSansMedSrc = s.generalSansMediumBase64 ? s.generalSansMediumBase64 : (s.generalSansMediumUrl || '');
+  parts.push('@font-face{font-family:"Tusker Grotesk";src:url("' + tuskerSrc + '") format("opentype");font-weight:600;font-style:normal;}');
+  parts.push('@font-face{font-family:"General Sans";src:url("' + generalSansSrc + '") format("opentype");font-weight:400;font-style:normal;}');
+  parts.push('@font-face{font-family:"General Sans";src:url("' + generalSansMedSrc + '") format("opentype");font-weight:500;font-style:normal;}');
   parts.push('*{margin:0;padding:0;box-sizing:border-box;}');
   parts.push('body{width:1440px;height:1800px;overflow:hidden;background:black;}');
   parts.push('</style></head><body>');
