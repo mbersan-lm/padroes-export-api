@@ -3,7 +3,7 @@ FROM ghcr.io/puppeteer/puppeteer:22.0.0
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm ci
+RUN npm install
 
 COPY . .
 
