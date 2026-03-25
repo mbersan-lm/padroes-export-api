@@ -51,10 +51,10 @@ app.post("/export", async (req, res) => {
 
 function generateHTML(s) {
   var creditPositions = {
-    "top-left": { top: 317, left: 72, rotation: 90 },
-    "bottom-left": { top: 727, left: 72, rotation: 90 },
-    "top-right": { top: 317, left: 1351, rotation: -90 },
-    "bottom-right": { top: 727, left: 1351, rotation: -90 },
+    "top-left": { top: 317, left: 72, rotation: -90 },
+    "bottom-left": { top: 727, left: 72, rotation: -90 },
+    "top-right": { top: 317, left: 1351, rotation: 90 },
+    "bottom-right": { top: 727, left: 1351, rotation: 90 },
   };
   var creditPos = creditPositions[s.creditPosition] || creditPositions["top-left"];
   var logoPositions = {
@@ -76,7 +76,7 @@ function generateHTML(s) {
   var blurRegionTop = 760;
   var blurRegionHeight = 1040;
   var numLayers = 12;
-  var maxBlur = 8;
+  var maxBlur = 5;
   for (var i = 0; i < numLayers; i++) {
     var blur = (maxBlur * (i + 1)) / numLayers;
     var startPct = (i / numLayers) * 100;
@@ -84,7 +84,7 @@ function generateHTML(s) {
     var maskStart = Math.max(0, startPct - 2);
     blurLayersHTML += '<div style="position:absolute;left:0;top:' + blurRegionTop + 'px;width:1440px;height:' + blurRegionHeight + 'px;backdrop-filter:blur(' + blur.toFixed(1) + 'px);-webkit-backdrop-filter:blur(' + blur.toFixed(1) + 'px);-webkit-mask-image:linear-gradient(to bottom,transparent ' + maskStart + '%,black ' + endPct + '%);mask-image:linear-gradient(to bottom,transparent ' + maskStart + '%,black ' + endPct + '%);"></div>';
   }
-  var titleTextGap = s.titleTextGap || 12;
+  var titleTextGap = s.titleTextGap || 9;
   var textBarGap = s.textBarGap || 36;
   var parts = [];
   parts.push('<!DOCTYPE html>');
