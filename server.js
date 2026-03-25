@@ -76,7 +76,7 @@ function generateHTML(s) {
   var blurRegionTop = 760;
   var blurRegionHeight = 1040;
   var numLayers = 12;
-  var maxBlur = 15;
+  var maxBlur = 8;
   for (var i = 0; i < numLayers; i++) {
     var blur = (maxBlur * (i + 1)) / numLayers;
     var startPct = (i / numLayers) * 100;
@@ -126,7 +126,7 @@ function generateHTML(s) {
   parts.push('<div style="position:absolute;bottom:0;left:0;right:0;display:flex;flex-direction:column;align-items:center;padding:0 72px 85px;z-index:10;">');
 
   if (s.title) {
-    parts.push('<h2 style="width:1296px;color:#FFF;text-align:center;font-family:\'Tusker Grotesk\',Impact,sans-serif;font-size:192px;font-weight:600;line-height:110%;letter-spacing:1px;text-transform:uppercase;margin-bottom:' + titleTextGap + 'px;">' + s.title + '</h2>');
+    parts.push('<h2 style="width:1296px;color:#FFF;text-align:center;font-family:\'Tusker Grotesk\',Impact,sans-serif;font-size:192px;font-weight:700;line-height:110%;letter-spacing:1px;text-transform:uppercase;margin-bottom:' + titleTextGap + 'px;">' + s.title + '</h2>');
   }
   if (s.text) {
     parts.push('<p style="width:1296px;color:#FFF;text-align:center;font-family:\'General Sans\',sans-serif;font-size:48px;font-weight:400;line-height:130%;letter-spacing:0.48px;margin-bottom:' + textBarGap + 'px;">' + s.text + '</p>');
@@ -148,7 +148,7 @@ function generateHTML(s) {
 
   // Escudo
   if (s.shieldEnabled && s.shieldImage) {
-    parts.push('<div style="position:absolute;top:16px;left:0;width:190px;height:160px;border-radius:0 12px 12px 0;background:' + (s.shieldColor || '#333') + ';backdrop-filter:blur(5px);display:flex;align-items:center;justify-content:center;z-index:20;">');
+    parts.push('<div style="position:absolute;top:52px;left:0;width:190px;height:160px;border-radius:0 12px 12px 0;background:' + (s.shieldColor || '#333') + ';backdrop-filter:blur(5px);display:flex;align-items:center;justify-content:center;z-index:20;">');
     parts.push('<img src="' + s.shieldImage + '" style="width:121px;height:121px;object-fit:contain;" />');
     parts.push('</div>');
   }
