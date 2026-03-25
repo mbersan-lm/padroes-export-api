@@ -89,9 +89,9 @@ function generateHTML(s) {
   var parts = [];
   parts.push('<!DOCTYPE html>');
   parts.push('<html><head><meta charset="utf-8"><style>');
-  parts.push('@font-face{font-family:"Tusker Grotesk";src:url("' + (s.tuskerFontUrl || '') + '") format("opentype");font-weight:600;font-style:normal;}');
-  parts.push('@font-face{font-family:"General Sans";src:url("' + (s.generalSansFontUrl || '') + '") format("opentype");font-weight:400;font-style:normal;}');
-  parts.push('@font-face{font-family:"General Sans";src:url("' + (s.generalSansMediumUrl || '') + '") format("opentype");font-weight:500;font-style:normal;}');
+  parts.push('@font-face{font-family:"Tusker Grotesk";src:url("' + (s.tuskerFontBase64 || s.tuskerFontUrl || '') + '") format("opentype");font-weight:600;font-style:normal;}');
+  parts.push('@font-face{font-family:"General Sans";src:url("' + (s.generalSansFontBase64 || s.generalSansFontUrl || '') + '") format("opentype");font-weight:400;font-style:normal;}');
+  parts.push('@font-face{font-family:"General Sans";src:url("' + (s.generalSansMediumBase64 || s.generalSansMediumUrl || '') + '") format("opentype");font-weight:500;font-style:normal;}');
   parts.push('*{margin:0;padding:0;box-sizing:border-box;}');
   parts.push('body{width:1440px;height:1800px;overflow:hidden;background:black;}');
   parts.push('</style></head><body>');
