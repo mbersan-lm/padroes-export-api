@@ -57,10 +57,11 @@ function generateHTML(s) {
     "bottom-right": { top: 727, left: 1368, rotation: 90 },
   };
   var creditPos = creditPositions[s.creditPosition] || creditPositions["top-left"];
+  var logoW = s.logoWidth || 180;
   var logoPositions = {
     left: { top: 72, left: 71 },
-    center: { top: 72, left: 630 },
-    right: { top: 72, left: 1188 },
+    center: { top: 72, left: Math.round((1440 - logoW) / 2) },
+    right: { top: 72, left: 1440 - 72 - logoW },
   };
   var logoPos = logoPositions[s.logoPosition] || logoPositions["center"];
   var bgPosX = s.backgroundOffsetX != null ? s.backgroundOffsetX : 50;
