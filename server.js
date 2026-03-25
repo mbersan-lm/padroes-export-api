@@ -143,12 +143,12 @@ function generateHTML(s) {
 
   // Crédito
   if (s.credit && s.creditVisible) {
-    parts.push('<div style="position:absolute;top:' + creditPos.top + 'px;left:' + creditPos.left + 'px;width:297px;height:17px;transform:rotate(' + creditPos.rotation + 'deg);transform-origin:top left;z-index:10;color:#FFF;font-family:\'General Sans\',sans-serif;font-size:16px;font-weight:500;line-height:105.563%;letter-spacing:0.32px;text-transform:uppercase;white-space:nowrap;">' + s.credit + '</div>');
+    parts.push('<div style="position:absolute;top:' + creditPos.top + 'px;left:' + creditPos.left + 'px;width:297px;height:17px;transform:rotate(' + creditPos.rotation + 'deg);transform-origin:top left;z-index:10;color:#FFF;font-family:\'General Sans\',sans-serif;font-size:16px;font-weight:500;font-style:normal;line-height:105.563%;letter-spacing:0.32px;text-transform:uppercase;white-space:nowrap;">' + s.credit + '</div>');
   }
 
   // Escudo
   if (s.shieldEnabled && s.shieldImage) {
-    parts.push('<div style="position:absolute;top:0;left:0;width:190px;height:160px;border-radius:0 12px 12px 0;background:' + (s.shieldColor || '#333') + ';backdrop-filter:blur(5px);display:flex;align-items:center;justify-content:center;z-index:20;padding-top:10px;">');
+    parts.push('<div style="position:absolute;top:16px;left:0;width:190px;height:160px;border-radius:0 12px 12px 0;background:' + (s.shieldColor || '#333') + ';backdrop-filter:blur(5px);display:flex;align-items:center;justify-content:center;z-index:20;">');
     parts.push('<img src="' + s.shieldImage + '" style="width:121px;height:121px;object-fit:contain;" />');
     parts.push('</div>');
   }
