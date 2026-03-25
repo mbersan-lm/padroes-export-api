@@ -24,8 +24,19 @@ app.post("/export", async (req, res) => {
     console.log("HTML length:", html.length);
     console.log("HTML starts:", html.substring(0, 100));
     await page.setContent(html, { waitUntil: "networkidle0", timeout: 30000 });
-    await page.evaluate(() => document.fonts.ready);
-    await new Promise((r) => setTimeout(r, 1500));
+    // Aguardar fontes carregarem com retry
+    await page.evaluate(async () => {
+      await document.fonts.ready;
+      // Forçar carregamento das fontes
+      var fonts = ["600 192px 'Tusker Grotesk'", "400 48px 'General Sans'", "500 16px 'General Sans'"];
+      var promises = fonts.map(function(f) {
+        return document.fonts.load(f).catch(function(e) { console.log("Font load failed:", f, e); });
+      });
+      await Promise.all(promises);
+      await document.fonts.ready;
+    });
+    // Delay extra para renderização completa
+    await new Promise((r) => setTimeout(r, 2000));
     const screenshot = await page.screenshot({ type: "png", clip: { x: 0, y: 0, width: 1440, height: 1800 } });
     res.set("Content-Type", "image/png");
     res.set("Content-Disposition", 'attachment; filename="template.png"');
@@ -65,7 +76,7 @@ function generateHTML(s) {
   var blurRegionTop = 760;
   var blurRegionHeight = 1040;
   var numLayers = 12;
-  var maxBlur = s.maxBlur || 7.5;
+  var maxBlur = 15;
   for (var i = 0; i < numLayers; i++) {
     var blur = (maxBlur * (i + 1)) / numLayers;
     var startPct = (i / numLayers) * 100;
@@ -78,12 +89,9 @@ function generateHTML(s) {
   var parts = [];
   parts.push('<!DOCTYPE html>');
   parts.push('<html><head><meta charset="utf-8"><style>');
-  var tuskerSrc = s.tuskerFontBase64 ? s.tuskerFontBase64 : (s.tuskerFontUrl || '');
-  var generalSansSrc = s.generalSansFontBase64 ? s.generalSansFontBase64 : (s.generalSansFontUrl || '');
-  var generalSansMedSrc = s.generalSansMediumBase64 ? s.generalSansMediumBase64 : (s.generalSansMediumUrl || '');
-  parts.push('@font-face{font-family:"Tusker Grotesk";src:url("' + tuskerSrc + '") format("opentype");font-weight:600;font-style:normal;}');
-  parts.push('@font-face{font-family:"General Sans";src:url("' + generalSansSrc + '") format("opentype");font-weight:400;font-style:normal;}');
-  parts.push('@font-face{font-family:"General Sans";src:url("' + generalSansMedSrc + '") format("opentype");font-weight:500;font-style:normal;}');
+  parts.push('@font-face{font-family:"Tusker Grotesk";src:url("' + (s.tuskerFontUrl || '') + '") format("opentype");font-weight:600;font-style:normal;}');
+  parts.push('@font-face{font-family:"General Sans";src:url("' + (s.generalSansFontUrl || '') + '") format("opentype");font-weight:400;font-style:normal;}');
+  parts.push('@font-face{font-family:"General Sans";src:url("' + (s.generalSansMediumUrl || '') + '") format("opentype");font-weight:500;font-style:normal;}');
   parts.push('*{margin:0;padding:0;box-sizing:border-box;}');
   parts.push('body{width:1440px;height:1800px;overflow:hidden;background:black;}');
   parts.push('</style></head><body>');
@@ -140,7 +148,7 @@ function generateHTML(s) {
 
   // Escudo
   if (s.shieldEnabled && s.shieldImage) {
-    parts.push('<div style="position:absolute;top:0;left:0;width:190px;height:160px;border-radius:0 12px 12px 0;background:' + (s.shieldColor || '#333') + ';backdrop-filter:blur(5px);display:flex;align-items:center;justify-content:center;z-index:20;">');
+    parts.push('<div style="position:absolute;top:0;left:0;width:190px;height:160px;border-radius:0 12px 12px 0;background:' + (s.shieldColor || '#333') + ';backdrop-filter:blur(5px);display:flex;align-items:center;justify-content:center;z-index:20;padding-top:10px;">');
     parts.push('<img src="' + s.shieldImage + '" style="width:121px;height:121px;object-fit:contain;" />');
     parts.push('</div>');
   }
