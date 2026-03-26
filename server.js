@@ -107,6 +107,16 @@ function generateHTML(s) {
   if (s.pipEnabled && s.pipImage) {
     parts.push('<div style="position:absolute;left:' + pipX + 'px;top:' + pipY + 'px;width:' + pipSize + 'px;height:' + pipSize + 'px;border-radius:50%;border:10px solid white;overflow:hidden;z-index:2;">');
     parts.push('<img src="' + s.pipImage + '" style="width:' + pipZoom + '%;height:' + pipZoom + '%;min-width:100%;min-height:100%;object-fit:cover;object-position:' + pipOffsetX + '% ' + pipOffsetY + '%;" />');
+    if (s.pipCredit) {
+      var pr = pipSize * 0.42;
+      var pcx = pipSize / 2;
+      var pcy = pipSize / 2;
+      parts.push('<svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;" viewBox="0 0 ' + pipSize + ' ' + pipSize + '">');
+      parts.push('<defs><path id="pip-credit-path" d="M ' + pcx + ',' + (pcy - pr) + ' A ' + pr + ',' + pr + ' 0 1,1 ' + (pcx - 0.001) + ',' + (pcy - pr) + '"/></defs>');
+      parts.push('<text fill="white" style="font-family:\'General Sans\',sans-serif;font-size:14px;font-weight:500;letter-spacing:0.5px;text-transform:uppercase;">');
+      parts.push('<textPath href="#pip-credit-path" startOffset="75%" text-anchor="middle">' + s.pipCredit + '</textPath>');
+      parts.push('</text></svg>');
+    }
     parts.push('</div>');
   }
 
