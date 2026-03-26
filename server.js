@@ -133,8 +133,26 @@ function generateHTML(s) {
     parts.push('<p style="width:1296px;color:#FFF;text-align:center;font-family:\'General Sans\',sans-serif;font-size:48px;font-weight:400;line-height:130%;letter-spacing:0.48px;margin-bottom:36px;">' + s.text + '</p>');
   }
 
-  // Barra gradiente
-  parts.push('<div style="width:1296px;height:6px;border-radius:30px;background:linear-gradient(90deg,#F64C68 0%,#FFB800 33%,#61B8E0 66%,#58C071 100%);"></div>');
+  // Barra gradiente segmentada (carrossel)
+  var totalPages = s.totalPages || 1;
+  var currentPageIndex = s.currentPageIndex || 0;
+  
+  if (totalPages === 1) {
+    parts.push('<div style="width:1296px;height:6px;border-radius:30px;background:linear-gradient(90deg,#F64C68 0%,#FFB800 33%,#61B8E0 66%,#58C071 100%);"></div>');
+  } else {
+    var segGap = 20;
+    var totalGaps = (totalPages - 1) * segGap;
+    var segWidth = Math.floor((1296 - totalGaps) / totalPages);
+    parts.push('<div style="display:flex;gap:20px;width:1296px;">');
+    for (var p = 0; p < totalPages; p++) {
+      if (p === currentPageIndex) {
+        parts.push('<div style="width:' + segWidth + 'px;height:6px;border-radius:30px;background:linear-gradient(90deg,#F64C68 0%,#FFB800 33%,#61B8E0 66%,#58C071 100%);"></div>');
+      } else {
+        parts.push('<div style="width:' + segWidth + 'px;height:6px;border-radius:30px;background:rgba(255,255,255,0.07);border:0.75px solid rgba(255,255,255,0.50);"></div>');
+      }
+    }
+    parts.push('</div>');
+  }
   parts.push('</div>');
 
   // Logo CazéTV
