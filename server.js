@@ -137,11 +137,11 @@ function generateHTML(s) {
   parts.push('<div style="position:absolute;bottom:0;left:0;right:0;display:flex;flex-direction:column;align-items:center;padding:0 72px 85px;z-index:10;">');
 
   if (s.title) {
-    parts.push('<h2 style="width:1296px;color:#FFF;text-align:center;font-family:\'Tusker Grotesk\',Impact,sans-serif;font-size:192px;font-weight:700;line-height:110%;letter-spacing:1px;text-transform:uppercase;margin-bottom:9px;">' + s.title + '</h2>');
+    parts.push('<h2 style="width:1296px;color:#FFF;text-align:center;font-family:\'Tusker Grotesk\',Impact,sans-serif;font-size:192px;font-weight:700;line-height:110%;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">' + s.title + '</h2>');
   }
   if (s.text) {
     var textContent = s.textHtml || s.text;
-    parts.push('<p style="width:1296px;color:#FFF;text-align:center;font-family:\'General Sans\',sans-serif;font-size:47px;font-weight:500;line-height:130%;letter-spacing:0.2px;margin-bottom:72px;">' + textContent + '</p>');
+    parts.push('<p style="width:1296px;color:#FFF;text-align:center;font-family:\'General Sans\',sans-serif;font-size:47px;font-weight:500;line-height:130%;letter-spacing:0.2px;margin-bottom:80px;">' + textContent + '</p>');
   }
 
   // Barra gradiente segmentada (carrossel)
