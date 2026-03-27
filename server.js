@@ -140,7 +140,8 @@ function generateHTML(s) {
     parts.push('<h2 style="width:1296px;color:#FFF;text-align:center;font-family:\'Tusker Grotesk\',Impact,sans-serif;font-size:192px;font-weight:700;line-height:110%;letter-spacing:1px;text-transform:uppercase;margin-bottom:9px;">' + s.title + '</h2>');
   }
   if (s.text) {
-    parts.push('<p style="width:1296px;color:#FFF;text-align:center;font-family:\'General Sans\',sans-serif;font-size:48px;font-weight:500;line-height:130%;letter-spacing:0.48px;margin-bottom:36px;word-break:keep-all;overflow-wrap:normal;">' + s.text + '</p>');
+    var textContent = s.textHtml || s.text;
+    parts.push('<p style="width:1296px;color:#FFF;text-align:center;font-family:\'General Sans\',sans-serif;font-size:48px;font-weight:500;line-height:130%;letter-spacing:0.48px;margin-bottom:36px;">' + textContent + '</p>');
   }
 
   // Barra gradiente segmentada (carrossel)
