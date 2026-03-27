@@ -106,7 +106,7 @@ function generateHTML(s) {
   // PiP elipse
   if (s.pipEnabled && s.pipImage) {
     parts.push('<div style="position:absolute;left:' + pipX + 'px;top:' + pipY + 'px;width:' + pipSize + 'px;height:' + pipSize + 'px;border-radius:50%;border:10px solid white;overflow:hidden;z-index:2;">');
-    parts.push('<img src="' + s.pipImage + '" style="width:' + pipZoom + '%;height:' + pipZoom + '%;min-width:100%;min-height:100%;object-fit:cover;object-position:' + pipOffsetX + '% ' + pipOffsetY + '%;" />');
+    parts.push('<img src="' + s.pipImage + '" style="width:' + pipZoom + '%;height:' + pipZoom + '%;min-width:100%;min-height:100%;object-fit:cover;object-position:' + pipOffsetX + '% ' + pipOffsetY + '%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);" />');
     if (s.pipCredit) {
       var pr = pipSize * 0.42;
       var pcx = pipSize / 2;
@@ -140,7 +140,7 @@ function generateHTML(s) {
     parts.push('<h2 style="width:1296px;color:#FFF;text-align:center;font-family:\'Tusker Grotesk\',Impact,sans-serif;font-size:192px;font-weight:700;line-height:110%;letter-spacing:1px;text-transform:uppercase;margin-bottom:9px;">' + s.title + '</h2>');
   }
   if (s.text) {
-    parts.push('<p style="width:1296px;color:#FFF;text-align:center;font-family:\'General Sans\',sans-serif;font-size:48px;font-weight:400;line-height:130%;letter-spacing:0.48px;margin-bottom:36px;">' + s.text + '</p>');
+    parts.push('<p style="width:1296px;color:#FFF;text-align:center;font-family:\'General Sans\',sans-serif;font-size:48px;font-weight:500;line-height:130%;letter-spacing:0.48px;margin-bottom:36px;">' + s.text + '</p>');
   }
 
   // Barra gradiente segmentada (carrossel)
@@ -178,8 +178,8 @@ function generateHTML(s) {
 
   // Escudo
   if (s.shieldEnabled && s.shieldImage) {
-    parts.push('<div style="position:absolute;top:52px;left:0;width:190px;height:160px;border-radius:0 12px 12px 0;background:' + (s.shieldColor || '#333') + ';backdrop-filter:blur(5px);display:flex;align-items:center;justify-content:center;z-index:20;">');
-    parts.push('<img src="' + s.shieldImage + '" style="width:121px;height:121px;object-fit:contain;" />');
+    parts.push('<div style="position:absolute;top:52px;left:0;width:190px;height:160px;border-radius:0 12px 12px 0;background:' + (s.shieldColor || '#333') + ';-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);display:flex;align-items:center;justify-content:center;z-index:20;overflow:hidden;">');
+    parts.push('<img src="' + s.shieldImage + '" style="width:121px;height:121px;object-fit:contain;" crossorigin="anonymous" />');
     parts.push('</div>');
   }
 
