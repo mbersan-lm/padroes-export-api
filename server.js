@@ -141,7 +141,7 @@ function generateHTML(s) {
   }
   if (s.text) {
     var textContent = s.textHtml || s.text;
-    parts.push('<p style="width:1296px;color:#FFF;text-align:center;font-family:\'General Sans\',sans-serif;font-size:47px;font-weight:500;line-height:130%;letter-spacing:0.2px;margin-bottom:24px;">' + textContent + '</p>');
+    parts.push('<p style="width:1296px;color:#FFF;text-align:center;font-family:\'General Sans\',sans-serif;font-size:47px;font-weight:500;line-height:130%;letter-spacing:0.2px;margin-bottom:54px;">' + textContent + '</p>');
   }
 
   // Barra gradiente segmentada (carrossel)
